@@ -153,4 +153,12 @@ public abstract class IOUtil {
 		return pw;
 	}
 
+	public static PrintWriter getPrintWriter(OutputStream os)
+			throws UnsupportedEncodingException, FileNotFoundException {
+		Writer osWriter = new BufferedWriter(
+				new OutputStreamWriter(os, "UTF-8"), 16384);
+		PrintWriter pw = new PrintWriter(osWriter, false);
+		return pw;
+	}
+
 }

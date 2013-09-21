@@ -31,10 +31,12 @@ import net.sourceforge.cobertura.util.FileFinder;
 import net.sourceforge.cobertura.util.Header;
 import net.sourceforge.cobertura.util.IOUtil;
 import net.sourceforge.cobertura.util.StringUtil;
+
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -57,6 +59,21 @@ public class XMLReport {
 
 		File file = new File(destinationDir, "coverage.xml");
 		pw = IOUtil.getPrintWriter(file);
+
+		doReport(projectData);
+	}
+
+	public XMLReport(ProjectData projectData, OutputStream os,
+			FileFinder finder, ComplexityCalculator complexity)
+			throws IOException {
+		this.complexity = complexity;
+		this.finder = finder;
+
+		pw = IOUtil.getPrintWriter(os);
+		doReport(projectData);
+	}
+
+	private void doReport(ProjectData projectData) {
 
 		try {
 			println("<?xml version=\"1.0\"?>");

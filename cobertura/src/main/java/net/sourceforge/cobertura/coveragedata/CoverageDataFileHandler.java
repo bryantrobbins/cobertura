@@ -76,7 +76,8 @@ public abstract class CoverageDataFileHandler {
 				}
 		}
 	}
-	private static ProjectData loadCoverageData(InputStream dataFile)
+
+	public static ProjectData loadCoverageData(InputStream dataFile)
 			throws IOException {
 		ObjectInputStream objects = null;
 
@@ -130,7 +131,7 @@ public abstract class CoverageDataFileHandler {
 		}
 	}
 
-	private static void saveCoverageData(ProjectData projectData,
+	public static void saveCoverageData(ProjectData projectData,
 			OutputStream dataFile) {
 		ObjectOutputStream objects = null;
 

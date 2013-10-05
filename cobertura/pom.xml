@@ -26,7 +26,7 @@
     which make working with file streams easier.
   </description>
 
-	<url>http://cobertura.sourceforge.net</url>
+	<url>http://guitar.sf.net</url>
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -66,6 +66,13 @@
 	</properties>
 
 	<dependencies>
+                 <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>0</version>
+                        <scope>system</scope>
+                        <systemPath>${toolsjar}</systemPath>
+                </dependency>
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
@@ -161,13 +168,6 @@
 			<artifactId>javacc</artifactId>
 			<version>${javaccVersion}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun</groupId>
-			<artifactId>tools</artifactId>
-			<version>0</version>
-			<scope>system</scope>
-			<systemPath>${toolsjar}</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -547,15 +547,15 @@
 	</developers>
 
 	<distributionManagement>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
+    <repository>
+      <id>archiva.internal</id>
+      <name>Internal Release Repository</name>
+      <url>http://gollum.cs.umd.edu:8888/archiva/repository/internal</url>
+    </repository>
+    <snapshotRepository>
+      <id>archiva.snapshots</id>
+      <name>Internal Snapshot Repository</name>
+      <url>http://gollum.cs.umd.edu:8888/archiva/repository/snapshots</url>
+    </snapshotRepository>
 	</distributionManagement>
 </project>

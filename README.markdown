@@ -1,18 +1,10 @@
-# COBERTURA
-[![Build Status](http://www.cloudbees.com/sites/default/files/Button-Built-on-CB-1.png)](https://cobertura.ci.cloudbees.com/job/Cobertura/)
-[![Build Status](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)](http://www.cloudbees.com/)
+# COBERTURA FOR GUITAR
 
 ## ABOUT
-Cobertura is a free Java code coverage reporting tool.  It is
-based on jcoverage 1.0.5.  See the [Cobertura web page](http://cobertura.sourceforge.net/) for more
-details.
-
-Since 2.0.0, Cobertura versions follow the [Semantic versioning](http://semver.org/) guidelines.
+This is a fork of the Cobertura Java coverage tool for compatibility with the GUITAR
+model-based GUI testing framework (see guitar.sf.net).
 
 ## COPYRIGHT
-Code in the net.sourceforge.cobertura.javancss package is
-Copyright (C) 2000 Chr. Clemens Lee   <clemens a.t kclee d.o.t com>
-
 See the included file "LICENSE.txt"
 
 ## LICENSE
@@ -30,11 +22,6 @@ Cobertura is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
-
-## CONVENTIONS
-Before committing
-* check all tests pass
-* build the project, so that all code gets uniformly indented. A Maven plugin ensures this.
 
 ## CONTRIBUTORS
 List of all contributors to Cobertura listed alphabetically by last name

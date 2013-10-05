@@ -9,178 +9,166 @@
 	<packaging>jar</packaging>
 	<name>Cobertura code coverage</name>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
-
 	<description>
     Cobertura is a free Java tool that calculates the percentage of
     code accessed by tests. It can be used to identify which parts of
     your Java program are lacking test coverage. It is based on jcoverage.
     
     This is a fork of Cobertura for integration with GUITAR, a model-based
-    testing framework for GUI-based applications (see guitar.sf.net). We need
-    to make very simple modifications of cobertra to expose some API calls 
-    which make working with file streams easier.
+    testing framework for GUI-based applications (see http://guitar.sf.net).
+    At a high level, we need
+    to make very simple modifications to cobertra to expose some API calls 
+    which make working with Cobertura from within Java code easier.
   </description>
 
-	<url>http://guitar.sf.net</url>
+  <properties>
+    <asmVersion>4.1</asmVersion>
+    <xercesVersion>2.6.2</xercesVersion>
+    <xalanVersion>2.6.0</xalanVersion>
+    <oroVersion>2.0.8</oroVersion>
+    <jaxenVersion>1.1-beta-8</jaxenVersion>
+    <commonsioVersion>2.4</commonsioVersion>
+    <antVersion>1.8.3</antVersion>
+    <jettyVersion>6.1.14</jettyVersion>
+    <simplexmlVersion>2.6.2</simplexmlVersion>
+    <guavaVersion>13.0.1</guavaVersion>
+    <groovyVersion>1.6-RC-1</groovyVersion>
+    <jsr305Version>1.3.2</jsr305Version>
+    <javaccVersion>5.0</javaccVersion>
+    <logbackVersion>1.0.13</logbackVersion>
+    <junitVersion>4.11</junitVersion>
+    <jdkVersion>1.5</jdkVersion>
+    <surefireVersion>2.12.3</surefireVersion>
+    <slf4jVersion>1.7.5</slf4jVersion>
+    <plugin.java.formatter.version>0.3.1</plugin.java.formatter.version>
+    <plugin.mvn.compiler.version>2.3.2</plugin.mvn.compiler.version>
+    <plugin.mvn.jar.version>2.3.2</plugin.mvn.jar.version>
+    <plugin.pmd.version>3.0.1</plugin.pmd.version>
+    <plugin.jdoc.version>2.9</plugin.jdoc.version>
+    <plugin.findbugs.version>2.5.2</plugin.findbugs.version>
+  </properties>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sonatype-releases</id>
-			<url>http://oss.sonatype.org/content/repositories/releases</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>clojars.org</id>
-			<url>http://clojars.org/repo</url>
-		</pluginRepository>
-	</pluginRepositories>
-
-	<properties>
-		<asmVersion>4.1</asmVersion>
-		<xercesVersion>2.6.2</xercesVersion>
-		<xalanVersion>2.6.0</xalanVersion>
-		<oroVersion>2.0.8</oroVersion>
-		<jaxenVersion>1.1-beta-8</jaxenVersion>
-		<commonsioVersion>2.4</commonsioVersion>
-		<antVersion>1.8.3</antVersion>
-		<jettyVersion>6.1.14</jettyVersion>
-		<simplexmlVersion>2.6.2</simplexmlVersion>
-		<guavaVersion>13.0.1</guavaVersion>
-		<groovyVersion>1.6-RC-1</groovyVersion>
-		<jsr305Version>1.3.2</jsr305Version>
-		<javaccVersion>5.0</javaccVersion>
-		<log4jVersion>1.2.9</log4jVersion>
-		<junitVersion>4.11</junitVersion>
-		<jdkVersion>1.5</jdkVersion>
-		<surefireVersion>2.12.3</surefireVersion>
-		<plugin.java.formatter.version>0.3.1</plugin.java.formatter.version>
-		<plugin.mvn.compiler.version>2.3.2</plugin.mvn.compiler.version>
-		<plugin.mvn.jar.version>2.3.2</plugin.mvn.jar.version>
-		<plugin.pmd.version>3.0.1</plugin.pmd.version>
-		<plugin.jdoc.version>2.9</plugin.jdoc.version>
-		<plugin.findbugs.version>2.5.2</plugin.findbugs.version>
-	</properties>
-
-	<dependencies>
-                 <dependency>
-                        <groupId>com.sun</groupId>
-                        <artifactId>tools</artifactId>
-                        <version>0</version>
-                        <scope>system</scope>
-                        <systemPath>${toolsjar}</systemPath>
-                </dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>${asmVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-tree</artifactId>
-			<version>${asmVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-commons</artifactId>
-			<version>${asmVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-util</artifactId>
-			<version>${asmVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-analysis</artifactId>
-			<version>${asmVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<version>${xercesVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>${xalanVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>oro</groupId>
-			<artifactId>oro</artifactId>
-			<version>${oroVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>jaxen</groupId>
-			<artifactId>jaxen</artifactId>
-			<version>${jaxenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commonsioVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>${antVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant-junit</artifactId>
-			<version>${antVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>servlet-api-2.5</artifactId>
-			<version>${jettyVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty</artifactId>
-			<version>${jettyVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
-			<version>${jettyVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-servlet-tester</artifactId>
-			<version>${jettyVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>${groovyVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.java.dev.javacc</groupId>
-			<artifactId>javacc</artifactId>
-			<version>${javaccVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4jVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junitVersion}</version>
-		</dependency>
-	</dependencies>
-
+  <dependencies>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>${asmVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-tree</artifactId>
+      <version>${asmVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-commons</artifactId>
+      <version>${asmVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-util</artifactId>
+      <version>${asmVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-analysis</artifactId>
+      <version>${asmVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>${xercesVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>xalan</groupId>
+      <artifactId>xalan</artifactId>
+      <version>${xalanVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>oro</groupId>
+      <artifactId>oro</artifactId>
+      <version>${oroVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>${jaxenVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commonsioVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>${antVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant-junit</artifactId>
+      <version>${antVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>servlet-api-2.5</artifactId>
+      <version>${jettyVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <version>${jettyVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>${jettyVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-servlet-tester</artifactId>
+      <version>${jettyVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>${groovyVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.javacc</groupId>
+      <artifactId>javacc</artifactId>
+      <version>${javaccVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun</groupId>
+      <artifactId>tools</artifactId>
+      <version>0</version>
+      <scope>system</scope>
+      <systemPath>${toolsjar}</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4jVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logbackVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junitVersion}</version>
+    </dependency>
+  </dependencies>
 
 	<profiles>
 		<profile>
@@ -536,9 +524,9 @@
 
 	<developers>
 		<developer>
-			<id>schristou88</id>
-			<name>Steven Christou</name>
-			<email>schristou88@gmail.com</email>
+			<id>bryantrobbins</id>
+			<name>Bryan Robbins</name>
+			<email>bryantrobbins@gmail.com</email>
 			<roles>
 				<role>Developer</role>
 			</roles>
@@ -558,4 +546,23 @@
       <url>http://gollum.cs.umd.edu:8888/archiva/repository/snapshots</url>
     </snapshotRepository>
 	</distributionManagement>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>sonatype-releases</id>
+      <url>http://oss.sonatype.org/content/repositories/releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>clojars.org</id>
+      <url>http://clojars.org/repo</url>
+    </pluginRepository>
+
+    <!-- If you want to try SNAPSHOT versions, you need Sonatype's snapshots repo: -->
+    <pluginRepository>
+      <id>sonatype-snapshots</id>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+
 </project>
